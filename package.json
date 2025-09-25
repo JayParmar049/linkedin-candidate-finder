@@ -1,0 +1,13 @@
+{
+  "name": "linkedin-candidate-finder",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run frontend\"",
+    "server": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
