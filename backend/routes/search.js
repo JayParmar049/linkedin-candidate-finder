@@ -51,6 +51,27 @@ router.get('/', async (req, res) => {
 
       if (!data.items || data.items.length < callNum) break;
     }
+    
+    if (req.query.country) {
+      items = items.filter(it =>
+        it.snippet.toLowerCase().includes(req.query.country.toLowerCase()) ||
+        it.title.toLowerCase().includes(req.query.country.toLowerCase())
+      );
+    }
+
+    if (req.query.experience) {
+      items = items.filter(it =>
+        it.snippet.toLowerCase().includes(req.query.experience.toLowerCase())
+      );
+    }
+
+    if (req.query.skills) {
+      const skillsArr = req.query.skills.split(",").map(s => s.trim().toLowerCase());
+      items = items.filter(it =>
+        skillsArr.some(skill => it.snippet.toLowerCase().includes(skill))
+      );
+    }
+
 
     return res.json({
       totalResults: total || results.length,
